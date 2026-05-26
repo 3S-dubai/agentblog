@@ -28,393 +28,107 @@
     --radius: 8px;
     --radius-lg: 14px;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--navy);
-    color: var(--text-primary);
-    min-height: 100vh;
-    font-size: 14px;
-    line-height: 1.6;
-  }
-
-  .app-shell {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    grid-template-rows: 56px 1fr;
-    min-height: 100vh;
-  }
-
-  /* TOP BAR */
-  .topbar {
-    grid-column: 1 / -1;
-    background: var(--navy-mid);
-    border-bottom: 1px solid var(--navy-border);
-    display: flex;
-    align-items: center;
-    padding: 0 24px;
-    gap: 12px;
-  }
-  .topbar-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    color: var(--gold);
-    letter-spacing: 0.5px;
-  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--navy); color: var(--text-primary); min-height: 100vh; font-size: 14px; line-height: 1.6; }
+  .app-shell { display: grid; grid-template-columns: 280px 1fr; grid-template-rows: 56px 1fr; min-height: 100vh; }
+  .topbar { grid-column: 1 / -1; background: var(--navy-mid); border-bottom: 1px solid var(--navy-border); display: flex; align-items: center; padding: 0 24px; gap: 12px; }
+  .topbar-logo { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--gold); letter-spacing: 0.5px; }
   .topbar-sep { width: 1px; height: 20px; background: var(--navy-border); }
   .topbar-sub { font-size: 12px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; }
   .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
-  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--danger); }
   .status-label { font-size: 12px; color: var(--text-muted); }
-
-  /* SIDEBAR */
-  .sidebar {
-    background: var(--navy-mid);
-    border-right: 1px solid var(--navy-border);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    overflow-y: auto;
-  }
-
-  .sidebar-section-label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-  }
-
+  .sidebar { background: var(--navy-mid); border-right: 1px solid var(--navy-border); padding: 20px; display: flex; flex-direction: column; gap: 20px; overflow-y: auto; }
+  .sidebar-section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 8px; }
   .field-group { display: flex; flex-direction: column; gap: 6px; }
-
-  label {
-    font-size: 12px;
-    color: var(--text-secondary);
-    font-weight: 500;
-  }
-
-  input[type="text"], input[type="password"], textarea, select {
-    background: var(--navy-surface);
-    border: 1px solid var(--navy-border);
-    border-radius: var(--radius);
-    color: var(--text-primary);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    padding: 8px 10px;
-    width: 100%;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-  input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
-    border-color: var(--gold-dim);
-  }
+  label { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+  input[type="text"], input[type="password"], textarea, select { background: var(--navy-surface); border: 1px solid var(--navy-border); border-radius: var(--radius); color: var(--text-primary); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 8px 10px; width: 100%; outline: none; transition: border-color 0.15s; }
+  input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus { border-color: var(--gold-dim); }
   input::placeholder, textarea::placeholder { color: var(--text-muted); }
-
   select option { background: var(--navy-surface); }
-
   .sidebar-divider { border: none; border-top: 1px solid var(--navy-border); }
-
-  /* QUEUE */
   .queue-list { display: flex; flex-direction: column; gap: 6px; max-height: 260px; overflow-y: auto; }
-  .queue-item {
-    background: var(--navy-surface);
-    border: 1px solid var(--navy-border);
-    border-radius: var(--radius);
-    padding: 8px 10px;
-    font-size: 12px;
-    color: var(--text-secondary);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    transition: border-color 0.15s;
-  }
+  .queue-item { background: var(--navy-surface); border: 1px solid var(--navy-border); border-radius: var(--radius); padding: 8px 10px; font-size: 12px; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; cursor: pointer; transition: border-color 0.15s; }
   .queue-item:hover { border-color: var(--gold-dim); }
   .queue-item.active { border-color: var(--gold); color: var(--text-primary); }
-  .queue-item.done { opacity: 0.5; }
-  .qi-badge {
-    width: 18px; height: 18px;
-    border-radius: 50%;
-    background: var(--navy-border);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 10px;
-    flex-shrink: 0;
-    color: var(--text-muted);
-  }
+  .qi-badge { width: 18px; height: 18px; border-radius: 50%; background: var(--navy-border); display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; color: var(--text-muted); }
   .qi-badge.done { background: var(--success-bg); color: #4caf7d; }
   .qi-badge.active { background: var(--warn-bg); color: var(--gold); }
   .qi-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
-
-  /* MAIN */
-  .main {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  .main-tabs {
-    display: flex;
-    border-bottom: 1px solid var(--navy-border);
-    background: var(--navy-mid);
-    padding: 0 24px;
-  }
-  .tab-btn {
-    background: none;
-    border: none;
-    color: var(--text-muted);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    padding: 14px 16px;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    transition: color 0.15s;
-  }
+  .main { display: flex; flex-direction: column; overflow: hidden; }
+  .main-tabs { display: flex; border-bottom: 1px solid var(--navy-border); background: var(--navy-mid); padding: 0 24px; }
+  .tab-btn { background: none; border: none; color: var(--text-muted); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 14px 16px; cursor: pointer; border-bottom: 2px solid transparent; transition: color 0.15s; }
   .tab-btn:hover { color: var(--text-secondary); }
   .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
-
-  .main-content {
-    flex: 1;
-    overflow-y: auto;
-    padding: 28px;
-  }
-
-  /* PANELS */
+  .main-content { flex: 1; overflow-y: auto; padding: 28px; }
   .panel { display: none; }
   .panel.active { display: block; }
-
-  /* INPUT PANEL */
   .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
-
-  .card {
-    background: var(--navy-surface);
-    border: 1px solid var(--navy-border);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-  }
-  .card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 15px;
-    color: var(--gold);
-    margin-bottom: 14px;
-  }
-
-  textarea.q-pool {
-    height: 180px;
-    resize: vertical;
-    font-size: 13px;
-    line-height: 1.7;
-  }
-
-  .btn {
-    background: none;
-    border: 1px solid var(--navy-border);
-    border-radius: var(--radius);
-    color: var(--text-secondary);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: all 0.15s;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
+  .card { background: var(--navy-surface); border: 1px solid var(--navy-border); border-radius: var(--radius-lg); padding: 20px; }
+  .card-title { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--gold); margin-bottom: 14px; }
+  textarea.q-pool { height: 180px; resize: vertical; font-size: 13px; line-height: 1.7; }
+  .btn { background: none; border: 1px solid var(--navy-border); border-radius: var(--radius); color: var(--text-secondary); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 8px 16px; cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px; }
   .btn:hover { border-color: var(--text-muted); color: var(--text-primary); }
-  .btn.primary {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: var(--navy);
-    font-weight: 500;
-  }
+  .btn.primary { background: var(--gold); border-color: var(--gold); color: var(--navy); font-weight: 500; }
   .btn.primary:hover { background: var(--gold-light); border-color: var(--gold-light); }
   .btn.primary:disabled { opacity: 0.4; cursor: not-allowed; }
-  .btn.danger { border-color: var(--danger); color: var(--danger); }
-  .btn.danger:hover { background: var(--danger-bg); }
   .btn.sm { padding: 5px 10px; font-size: 12px; }
-
   .btn-row { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
-
-  /* SEO META FIELDS */
   .seo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .seo-grid.full { grid-template-columns: 1fr; }
   .char-count { font-size: 11px; color: var(--text-muted); text-align: right; margin-top: 3px; }
   .char-count.warn { color: var(--warn); }
   .char-count.over { color: var(--danger); }
-
-  /* PREVIEW PANEL */
-  .preview-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-  .preview-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    color: var(--text-primary);
-    flex: 1;
-  }
-  .badge {
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-weight: 500;
-  }
+  .preview-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+  .preview-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--text-primary); flex: 1; }
+  .badge { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 500; }
   .badge.draft { background: var(--warn-bg); color: var(--gold); border: 1px solid var(--gold-dim); }
   .badge.published { background: var(--success-bg); color: #4caf7d; border: 1px solid var(--success); }
-  .badge.generating { background: var(--navy-border); color: var(--text-secondary); }
-
-  .blog-content-area {
-    background: var(--navy-surface);
-    border: 1px solid var(--navy-border);
-    border-radius: var(--radius-lg);
-    padding: 28px 32px;
-    font-size: 14px;
-    line-height: 1.85;
-    color: var(--text-secondary);
-    min-height: 300px;
-    white-space: pre-wrap;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .blog-content-area[contenteditable="true"] {
-    outline: none;
-    border-color: var(--gold-dim);
-    cursor: text;
-  }
-  .blog-content-area h1, .blog-content-area h2, .blog-content-area h3 {
-    font-family: 'Playfair Display', serif;
-    color: var(--text-primary);
-    margin: 1.4em 0 0.5em;
-  }
-  .blog-content-area h1 { font-size: 24px; }
-  .blog-content-area h2 { font-size: 19px; color: var(--gold); }
-  .blog-content-area h3 { font-size: 16px; }
+  .blog-content-area { background: var(--navy-surface); border: 1px solid var(--navy-border); border-radius: var(--radius-lg); padding: 28px 32px; font-size: 14px; line-height: 1.85; color: var(--text-secondary); min-height: 300px; font-family: 'DM Sans', sans-serif; }
+  .blog-content-area[contenteditable="true"] { outline: none; border-color: var(--gold-dim); cursor: text; }
+  .blog-content-area h1 { font-family: 'Playfair Display', serif; color: var(--text-primary); font-size: 24px; margin: 1.4em 0 0.5em; }
+  .blog-content-area h2 { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 19px; margin: 1.4em 0 0.5em; }
+  .blog-content-area h3 { font-family: 'Playfair Display', serif; color: var(--text-primary); font-size: 16px; margin: 1.4em 0 0.5em; }
   .blog-content-area p { margin-bottom: 1em; }
   .blog-content-area ul, .blog-content-area ol { padding-left: 20px; margin-bottom: 1em; }
   .blog-content-area li { margin-bottom: 0.4em; }
   .blog-content-area strong { color: var(--text-primary); }
-
-  /* SEO PANEL */
   .seo-panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .seo-preview-box {
-    background: var(--navy);
-    border: 1px solid var(--navy-border);
-    border-radius: var(--radius);
-    padding: 16px 18px;
-    margin-top: 16px;
-  }
+  .seo-preview-box { background: var(--navy); border: 1px solid var(--navy-border); border-radius: var(--radius); padding: 16px 18px; margin-top: 16px; }
   .serp-title { color: #8ab4f8; font-size: 18px; margin-bottom: 3px; }
   .serp-url { color: #4caf7d; font-size: 12px; margin-bottom: 5px; }
   .serp-desc { color: #bdc1c6; font-size: 13px; line-height: 1.5; }
   .kw-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-  .kw-tag {
-    background: var(--navy-border);
-    border-radius: 4px;
-    padding: 3px 9px;
-    font-size: 12px;
-    color: var(--text-secondary);
-    display: flex; align-items: center; gap: 5px;
-  }
+  .kw-tag { background: var(--navy-border); border-radius: 4px; padding: 3px 9px; font-size: 12px; color: var(--text-secondary); display: flex; align-items: center; gap: 5px; }
   .kw-tag .remove { cursor: pointer; color: var(--text-muted); font-size: 14px; line-height: 1; }
   .kw-tag .remove:hover { color: var(--danger); }
-
-  /* PUBLISH PANEL */
   .publish-checklist { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
   .check-row { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-secondary); }
   .check-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; }
   .check-icon.ok { background: var(--success-bg); color: #4caf7d; }
   .check-icon.warn { background: var(--warn-bg); color: var(--gold); }
   .check-icon.fail { background: var(--danger-bg); color: var(--danger); }
-
-  .wp-result {
-    background: var(--navy-surface);
-    border: 1px solid var(--navy-border);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    margin-top: 20px;
-    display: none;
-  }
+  .wp-result { background: var(--navy-surface); border: 1px solid var(--navy-border); border-radius: var(--radius-lg); padding: 20px; margin-top: 20px; display: none; }
   .wp-result.visible { display: block; }
-
-  /* LOGS */
-  .log-area {
-    background: var(--navy);
-    border: 1px solid var(--navy-border);
-    border-radius: var(--radius);
-    padding: 12px 14px;
-    font-family: monospace;
-    font-size: 12px;
-    color: var(--text-muted);
-    max-height: 160px;
-    overflow-y: auto;
-    margin-top: 14px;
-  }
+  .log-area { background: var(--navy); border: 1px solid var(--navy-border); border-radius: var(--radius); padding: 12px 14px; font-family: monospace; font-size: 12px; color: var(--text-muted); max-height: 160px; overflow-y: auto; margin-top: 14px; }
   .log-line { margin-bottom: 3px; }
   .log-line.ok { color: #4caf7d; }
   .log-line.err { color: var(--danger); }
   .log-line.info { color: var(--gold); }
-
-  /* SPINNER */
-  .spinner {
-    display: inline-block;
-    width: 14px; height: 14px;
-    border: 2px solid var(--navy-border);
-    border-top-color: var(--gold);
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    vertical-align: middle;
-  }
+  .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--navy-border); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; }
   @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* PROGRESS BAR */
-  .progress-bar-wrap {
-    background: var(--navy-border);
-    border-radius: 4px;
-    height: 3px;
-    margin-top: 8px;
-    overflow: hidden;
-  }
-  .progress-bar-fill {
-    height: 100%;
-    background: var(--gold);
-    border-radius: 4px;
-    transition: width 0.4s ease;
-  }
-
-  /* SCHEMA PREVIEW */
-  .schema-box {
-    background: var(--navy);
-    border: 1px solid var(--navy-border);
-    border-radius: var(--radius);
-    padding: 12px;
-    font-family: monospace;
-    font-size: 11px;
-    color: #8ab4f8;
-    white-space: pre;
-    overflow-x: auto;
-    margin-top: 8px;
-    max-height: 200px;
-    overflow-y: auto;
-  }
-
+  .progress-bar-wrap { background: var(--navy-border); border-radius: 4px; height: 3px; margin-top: 8px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: var(--gold); border-radius: 4px; transition: width 0.4s ease; }
+  .schema-box { background: var(--navy); border: 1px solid var(--navy-border); border-radius: var(--radius); padding: 12px; font-family: monospace; font-size: 11px; color: #8ab4f8; white-space: pre; overflow-x: auto; margin-top: 8px; max-height: 200px; overflow-y: auto; }
   .word-count-bar { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
   .wc-label { font-size: 12px; color: var(--text-muted); }
   .wc-value { font-size: 12px; font-weight: 500; color: var(--text-secondary); }
-
   ::-webkit-scrollbar { width: 5px; height: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--navy-border); border-radius: 3px; }
 </style>
 </head>
 <body>
-
 <div class="app-shell">
-
-  <!-- TOP BAR -->
   <header class="topbar">
     <span class="topbar-logo">3S Group</span>
     <div class="topbar-sep"></div>
@@ -425,13 +139,12 @@
     </div>
   </header>
 
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div>
       <div class="sidebar-section-label">WordPress Connection</div>
       <div class="field-group">
         <label>Site URL</label>
-        <input type="text" id="wp-url" placeholder="https://3sgroup.ae" value="">
+        <input type="text" id="wp-url" placeholder="https://3sbusinessme.com">
       </div>
       <div class="field-group" style="margin-top:10px">
         <label>Username</label>
@@ -445,13 +158,9 @@
         <label>Default Category</label>
         <input type="text" id="wp-cat" placeholder="Business Setup" value="Business Setup">
       </div>
-      <button class="btn sm" style="margin-top:10px; width:100%" onclick="testWP()">
-        <span id="test-icon">&#10003;</span> Test Connection
-      </button>
+      <button class="btn sm" style="margin-top:10px;width:100%" onclick="testWP()">&#10003; Test Connection</button>
     </div>
-
     <hr class="sidebar-divider">
-
     <div>
       <div class="sidebar-section-label">Claude API</div>
       <div class="field-group">
@@ -459,9 +168,7 @@
         <input type="password" id="claude-key" placeholder="sk-ant-...">
       </div>
     </div>
-
     <hr class="sidebar-divider">
-
     <div>
       <div class="sidebar-section-label">Queue <span id="queue-count" style="color:var(--gold)">(0)</span></div>
       <div class="queue-list" id="queue-list">
@@ -470,36 +177,26 @@
     </div>
   </aside>
 
-  <!-- MAIN -->
   <main class="main">
     <nav class="main-tabs">
-      <button class="tab-btn active" onclick="switchTab('input', this)">Questions</button>
-      <button class="tab-btn" onclick="switchTab('preview', this)">Draft &amp; Edit</button>
-      <button class="tab-btn" onclick="switchTab('seo', this)">SEO Fields</button>
-      <button class="tab-btn" onclick="switchTab('publish', this)">Publish</button>
+      <button class="tab-btn active" onclick="switchTab('input',this)">Questions</button>
+      <button class="tab-btn" onclick="switchTab('preview',this)">Draft &amp; Edit</button>
+      <button class="tab-btn" onclick="switchTab('seo',this)">SEO Fields</button>
+      <button class="tab-btn" onclick="switchTab('publish',this)">Publish</button>
     </nav>
 
     <div class="main-content">
 
-      <!-- QUESTIONS TAB -->
       <div class="panel active" id="panel-input">
         <div class="input-grid">
-          <div class="card" style="grid-column: 1 / -1">
+          <div class="card" style="grid-column:1/-1">
             <div class="card-title">Question Pool</div>
-            <textarea class="q-pool" id="question-pool" placeholder="Paste your questions here — one per line.
-
-Examples:
-How do I set up a company in Dubai?
-What is the cost of business setup in UAE free zones?
-What documents are needed for a trade licence in Dubai?
-How long does it take to get a Golden Visa?
-What is the difference between mainland and free zone company?"></textarea>
+            <textarea class="q-pool" id="question-pool" placeholder="Paste your questions here — one per line."></textarea>
             <div class="btn-row">
               <button class="btn primary" onclick="loadQueue()">Load Queue</button>
               <button class="btn" onclick="clearQueue()">Clear All</button>
             </div>
           </div>
-
           <div class="card">
             <div class="card-title">Blog Settings</div>
             <div class="field-group">
@@ -529,12 +226,9 @@ What is the difference between mainland and free zone company?"></textarea>
               </select>
             </div>
           </div>
-
           <div class="card">
             <div class="card-title">Generation Controls</div>
-            <div style="font-size:13px;color:var(--text-muted);margin-bottom:14px">
-              Select a question from the queue, then generate. Review before publishing.
-            </div>
+            <div style="font-size:13px;color:var(--text-muted);margin-bottom:14px">Select a question from the queue, then generate.</div>
             <div class="field-group">
               <label>Active question</label>
               <input type="text" id="active-question" placeholder="Load queue to begin" readonly style="font-style:italic;color:var(--text-muted)">
@@ -554,13 +248,12 @@ What is the difference between mainland and free zone company?"></textarea>
         </div>
       </div>
 
-      <!-- PREVIEW TAB -->
       <div class="panel" id="panel-preview">
         <div class="preview-header">
           <div class="preview-title" id="preview-h1">No blog generated yet.</div>
           <span class="badge draft" id="preview-badge">Draft</span>
           <button class="btn sm" onclick="toggleEdit()">&#9998; Edit</button>
-          <button class="btn sm" onclick="regenerateBlog()">&#8635; Regenerate</button>
+          <button class="btn sm" onclick="generateBlog()">&#8635; Regenerate</button>
         </div>
         <div class="word-count-bar">
           <span class="wc-label">Words:</span>
@@ -573,24 +266,22 @@ What is the difference between mainland and free zone company?"></textarea>
         </div>
       </div>
 
-      <!-- SEO TAB -->
       <div class="panel" id="panel-seo">
         <div style="margin-bottom:20px">
-          <div class="card-title" style="font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);margin-bottom:4px">SEO Fields</div>
+          <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);margin-bottom:4px">SEO Fields</div>
           <div style="font-size:13px;color:var(--text-muted)">These will be pushed to RankMath via the WordPress REST API on publish.</div>
         </div>
-
         <div class="seo-panel-grid">
           <div class="card">
             <div class="card-title">Titles &amp; Meta</div>
             <div class="field-group">
               <label>SEO Title <span style="color:var(--text-muted);font-weight:400">(max 60 chars)</span></label>
-              <input type="text" id="seo-title" placeholder="Auto-generated on blog creation" oninput="updateCharCount('seo-title','seo-title-count',60)">
+              <input type="text" id="seo-title" placeholder="Auto-generated" oninput="updateCharCount('seo-title','seo-title-count',60)">
               <div class="char-count" id="seo-title-count">0 / 60</div>
             </div>
             <div class="field-group" style="margin-top:12px">
               <label>Meta Description <span style="color:var(--text-muted);font-weight:400">(max 155 chars)</span></label>
-              <textarea id="meta-desc" rows="3" placeholder="Auto-generated on blog creation" oninput="updateCharCount('meta-desc','meta-desc-count',155)" style="resize:none"></textarea>
+              <textarea id="meta-desc" rows="3" placeholder="Auto-generated" oninput="updateCharCount('meta-desc','meta-desc-count',155)" style="resize:none"></textarea>
               <div class="char-count" id="meta-desc-count">0 / 155</div>
             </div>
             <div class="field-group" style="margin-top:12px">
@@ -598,7 +289,6 @@ What is the difference between mainland and free zone company?"></textarea>
               <input type="text" id="url-slug" placeholder="auto-generated-from-title">
             </div>
           </div>
-
           <div class="card">
             <div class="card-title">Keywords</div>
             <div class="field-group">
@@ -615,8 +305,7 @@ What is the difference between mainland and free zone company?"></textarea>
               <input type="text" id="wp-tags" placeholder="Dubai, business setup, UAE, free zone">
             </div>
           </div>
-
-          <div class="card" style="grid-column: 1 / -1">
+          <div class="card" style="grid-column:1/-1">
             <div class="card-title">SERP Preview</div>
             <div class="seo-preview-box">
               <div class="serp-title" id="serp-title-preview">—</div>
@@ -624,29 +313,23 @@ What is the difference between mainland and free zone company?"></textarea>
               <div class="serp-desc" id="serp-desc-preview">—</div>
             </div>
           </div>
-
-          <div class="card" style="grid-column: 1 / -1">
+          <div class="card" style="grid-column:1/-1">
             <div class="card-title">FAQ Schema (JSON-LD)</div>
-            <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Auto-generated from the FAQ block in the blog. Injected as custom HTML in WordPress.</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Auto-generated from the FAQ block. Injected as custom HTML in WordPress.</div>
             <div class="schema-box" id="faq-schema">Schema will appear after blog generation.</div>
           </div>
         </div>
-
-        <div style="margin-top:8px">
-          <button class="btn sm" onclick="updateSerpPreview()">&#8635; Refresh Preview</button>
-        </div>
+        <div style="margin-top:8px"><button class="btn sm" onclick="updateSerpPreview()">&#8635; Refresh Preview</button></div>
       </div>
 
-      <!-- PUBLISH TAB -->
       <div class="panel" id="panel-publish">
         <div style="margin-bottom:20px">
           <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);margin-bottom:4px">Publish to WordPress</div>
           <div style="font-size:13px;color:var(--text-muted)">Creates a full WordPress page with blog content, RankMath SEO fields, categories and tags.</div>
         </div>
-
         <div class="card" style="margin-bottom:16px">
           <div class="card-title">Pre-publish Checklist</div>
-          <div class="publish-checklist" id="publish-checklist">
+          <div class="publish-checklist">
             <div class="check-row"><div class="check-icon warn" id="chk-content">?</div> Blog content generated</div>
             <div class="check-row"><div class="check-icon warn" id="chk-title">?</div> SEO title set (&le;60 chars)</div>
             <div class="check-row"><div class="check-icon warn" id="chk-meta">?</div> Meta description set (&le;155 chars)</div>
@@ -654,7 +337,6 @@ What is the difference between mainland and free zone company?"></textarea>
             <div class="check-row"><div class="check-icon warn" id="chk-wp">?</div> WordPress credentials entered</div>
           </div>
         </div>
-
         <div class="card" style="margin-bottom:16px">
           <div class="card-title">Publish Settings</div>
           <div class="seo-panel-grid">
@@ -681,12 +363,10 @@ What is the difference between mainland and free zone company?"></textarea>
             <button class="btn sm" onclick="runChecklist()">&#10003; Run Checklist</button>
           </div>
         </div>
-
         <div class="wp-result" id="wp-result">
           <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px">Publish result</div>
           <div id="wp-result-content"></div>
         </div>
-
         <div class="log-area" id="log-area">
           <div class="log-line">— Log output will appear here —</div>
         </div>
@@ -694,19 +374,13 @@ What is the difference between mainland and free zone company?"></textarea>
 
     </div>
   </main>
-
 </div>
 
 <script>
-let state = {
-  queue: [],
-  currentIdx: -1,
-  blogHTML: '',
-  rawText: '',
-  generated: false,
-  editing: false,
-  secKws: [],
-};
+let state = { queue: [], currentIdx: -1, blogHTML: '', generated: false, secKws: [] };
+
+// The proxy URL — calls our Netlify function instead of Anthropic directly
+const PROXY_URL = "https://thriving-trifle-db6b81.netlify.app/.netlify/functions/claude-proxy";
 
 function switchTab(name, btn) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
@@ -748,17 +422,10 @@ function clearQueue() {
 
 function renderQueue() {
   const list = document.getElementById('queue-list');
-  if (!state.queue.length) {
-    list.innerHTML = '<div style="font-size:12px;color:var(--text-muted);padding:8px 0">No questions queued yet.</div>';
-    return;
-  }
+  if (!state.queue.length) { list.innerHTML = '<div style="font-size:12px;color:var(--text-muted);padding:8px 0">No questions queued yet.</div>'; return; }
   list.innerHTML = state.queue.map((q, i) => {
-    let cls = '';
-    if (i === state.currentIdx) cls = 'active';
-    return `<div class="queue-item ${cls}" onclick="selectQuestion(${i})">
-      <div class="qi-badge ${i === state.currentIdx ? 'active' : ''}">${i+1}</div>
-      <div class="qi-text">${q}</div>
-    </div>`;
+    let cls = i === state.currentIdx ? 'active' : '';
+    return `<div class="queue-item ${cls}" onclick="selectQuestion(${i})"><div class="qi-badge ${i === state.currentIdx ? 'active' : ''}">${i+1}</div><div class="qi-text">${q}</div></div>`;
   }).join('');
 }
 
@@ -779,6 +446,17 @@ function setProgress(pct, msg) {
   document.getElementById('gen-status').textContent = msg;
 }
 
+async function callClaude(payload, apiKey) {
+  const response = await fetch(PROXY_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey },
+    body: JSON.stringify(payload)
+  });
+  const data = await response.json();
+  if (data.error) throw new Error(data.error.message);
+  return data;
+}
+
 async function generateBlog() {
   const apiKey = document.getElementById('claude-key').value.trim();
   if (!apiKey) { alert('Please enter your Claude API key in the sidebar.'); return; }
@@ -788,14 +466,12 @@ async function generateBlog() {
   const wordTarget = document.getElementById('word-target').value;
   const tone = document.getElementById('tone').value;
   const ctaType = document.getElementById('cta-type').value;
-
   const ctaMap = {
     'company-formation': '3S Group — your trusted partner for company formation in Dubai. Contact our consultants today for a free consultation.',
     'pro-services': '3S Group offers end-to-end PRO services across Dubai and the UAE. Get in touch to streamline your government transactions.',
     'golden-visa': 'Secure your UAE Golden Visa with 3S Group. Our experts guide you through every step of the application.',
     'general': 'Need expert advice on doing business in the UAE? Speak with a 3S Group consultant for a free, no-obligation consultation.'
   };
-  const cta = ctaMap[ctaType];
 
   const systemPrompt = `You are a senior content strategist and SEO writer for 3S Group, a leading business setup consultancy in Dubai, UAE.
 
@@ -809,22 +485,22 @@ BUSINESS CONTEXT:
 STRUCTURE (strictly follow this):
 # [Compelling H1 that directly answers the question]
 
-[1–2 paragraph introduction — hook the reader, establish credibility, preview what they'll learn]
+[1-2 paragraph introduction]
 
 ## [H2: Core explanation or first major topic]
-[2–3 paragraphs with depth]
+[2-3 paragraphs with depth]
 
 ## [H2: Second major topic or step-by-step breakdown]
-[2–3 paragraphs; include numbered lists or bullets where helpful]
+[2-3 paragraphs; include numbered lists or bullets where helpful]
 
 ## [H2: Third major topic — costs, timelines, requirements, or comparisons]
-[2–3 paragraphs with specific figures and UAE context]
+[2-3 paragraphs with specific figures and UAE context]
 
 ## [H2: Common mistakes or things to consider]
-[1–2 paragraphs]
+[1-2 paragraphs]
 
-## [H2: Why choose 3S Group / How 3S Group helps]
-[1 paragraph — naturally integrates the CTA without being salesy]
+## [H2: Why choose 3S Group]
+[1 paragraph]
 
 ## Frequently Asked Questions
 
@@ -839,7 +515,7 @@ A: [Direct answer]
 
 ---
 
-${cta}
+${ctaMap[ctaType]}
 
 SEO RULES:
 - Target approximately ${wordTarget} words
@@ -848,9 +524,7 @@ SEO RULES:
 - No keyword stuffing
 - Write in clear British English
 
-OUTPUT: Return only the blog content in Markdown. No preamble. No meta commentary. Start directly with the # heading.`;
-
-  const userPrompt = `Write a comprehensive blog post answering this question: "${question}"`;
+OUTPUT: Return only the blog content in Markdown. No preamble. Start directly with the # heading.`;
 
   document.getElementById('gen-btn').disabled = true;
   document.getElementById('gen-spinner').style.display = 'inline-block';
@@ -859,49 +533,34 @@ OUTPUT: Return only the blog content in Markdown. No preamble. No meta commentar
   log('Generating blog for: ' + question, 'info');
 
   try {
-    setProgress(20, 'Sending prompt to Claude...');
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 4000,
-        system: systemPrompt,
-        messages: [{ role: 'user', content: userPrompt }]
-      })
-    });
-
-    setProgress(60, 'Receiving response...');
-    const data = await response.json();
-    if (data.error) throw new Error(data.error.message);
+    setProgress(30, 'Writing blog content...');
+    const data = await callClaude({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 4000,
+      system: systemPrompt,
+      messages: [{ role: 'user', content: `Write a comprehensive blog post answering this question: "${question}"` }]
+    }, apiKey);
 
     const markdown = data.content[0].text;
-    setProgress(80, 'Rendering content...');
+    setProgress(70, 'Rendering content...');
 
-    state.rawText = markdown;
     state.blogHTML = markdownToHTML(markdown);
     state.generated = true;
-
     document.getElementById('blog-output').innerHTML = state.blogHTML;
 
     const h1Match = markdown.match(/^#\s+(.+)/m);
-    const h1Text = h1Match ? h1Match[1] : question;
-    document.getElementById('preview-h1').textContent = h1Text;
+    document.getElementById('preview-h1').textContent = h1Match ? h1Match[1] : question;
 
     const words = markdown.replace(/#/g,'').trim().split(/\s+/).length;
     document.getElementById('word-count').textContent = words.toLocaleString();
     document.getElementById('read-time').textContent = Math.ceil(words / 200) + ' min';
 
-    setProgress(90, 'Generating SEO fields...');
+    setProgress(85, 'Generating SEO fields...');
     await generateSEOFields(question, markdown, apiKey);
 
     setProgress(100, 'Done!');
     log('Blog generated successfully. ' + words + ' words.', 'ok');
-
-    setTimeout(() => {
-      document.getElementById('gen-progress').style.display = 'none';
-      setProgress(0, '');
-    }, 2000);
+    setTimeout(() => { document.getElementById('gen-progress').style.display = 'none'; setProgress(0,''); }, 2000);
 
   } catch(e) {
     log('Error: ' + e.message, 'err');
@@ -913,97 +572,68 @@ OUTPUT: Return only the blog content in Markdown. No preamble. No meta commentar
 }
 
 async function generateSEOFields(question, markdown, apiKey) {
-  const seoPrompt = `Given this blog question and content, return a JSON object with these fields:
+  const seoPrompt = `Given this blog question and content, return a JSON object with:
 - seo_title: SEO title under 60 characters
 - meta_description: Meta description under 155 characters
 - url_slug: clean hyphenated URL slug (lowercase, no stop words)
-- focus_keyword: the single best focus keyword phrase (2-4 words)
+- focus_keyword: single best focus keyword phrase (2-4 words)
 - secondary_keywords: array of 4-5 related keyword phrases
 - tags: array of 5-8 WordPress tags
-- faq_pairs: array of objects with "question" and "answer" from the FAQ section of the blog
+- faq_pairs: array of objects with "question" and "answer" from the FAQ section
 
-Return ONLY the JSON. No markdown fences. No commentary.
+Return ONLY valid JSON. No markdown fences. No commentary.
 
 Question: ${question}
+Blog excerpt: ${markdown.substring(0, 600)}`;
 
-Blog excerpt (first 600 chars): ${markdown.substring(0, 600)}`;
-
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
+  try {
+    const data = await callClaude({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 800,
       messages: [{ role: 'user', content: seoPrompt }]
-    })
-  });
+    }, apiKey);
 
-  const data = await res.json();
-  if (data.error) return;
-
-  try {
     const seo = JSON.parse(data.content[0].text.replace(/```json|```/g,'').trim());
-
     document.getElementById('seo-title').value = seo.seo_title || '';
     document.getElementById('meta-desc').value = seo.meta_description || '';
     document.getElementById('url-slug').value = seo.url_slug || '';
     document.getElementById('focus-kw').value = seo.focus_keyword || '';
     document.getElementById('wp-tags').value = (seo.tags || []).join(', ');
-
     state.secKws = seo.secondary_keywords || [];
     renderSecKws();
-
     updateCharCount('seo-title','seo-title-count',60);
     updateCharCount('meta-desc','meta-desc-count',155);
     updateSerpPreview();
 
     if (seo.faq_pairs && seo.faq_pairs.length) {
-      const schema = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": seo.faq_pairs.map(f => ({
-          "@type": "Question",
-          "name": f.question,
-          "acceptedAnswer": { "@type": "Answer", "text": f.answer }
-        }))
-      };
+      const schema = { "@context": "https://schema.org", "@type": "FAQPage", "mainEntity": seo.faq_pairs.map(f => ({ "@type": "Question", "name": f.question, "acceptedAnswer": { "@type": "Answer", "text": f.answer } })) };
       document.getElementById('faq-schema').textContent = JSON.stringify(schema, null, 2);
     }
-
     log('SEO fields auto-populated.', 'ok');
   } catch(e) {
-    log('SEO field parse error: ' + e.message, 'err');
+    log('SEO field error: ' + e.message, 'err');
   }
-}
-
-async function regenerateBlog() {
-  if (state.currentIdx < 0) return;
-  await generateBlog();
 }
 
 function toggleEdit() {
   const el = document.getElementById('blog-output');
-  state.editing = !state.editing;
-  el.contentEditable = state.editing ? 'true' : 'false';
-  if (state.editing) el.focus();
-  document.querySelector('.tab-btn[onclick*="preview"]');
+  const editing = el.contentEditable !== 'true';
+  el.contentEditable = editing ? 'true' : 'false';
+  if (editing) el.focus();
 }
 
 function markdownToHTML(md) {
-  let html = md
-    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/^---$/gm, '<hr style="border-color:var(--navy-border);margin:1.5em 0">')
-    .replace(/^\d+\.\s+(.+)$/gm, '<li style="list-style-type:decimal">$1</li>')
-    .replace(/^[-*]\s+(.+)$/gm, '<li>$1</li>')
-    .replace(/(<li[^>]*>.*<\/li>\n?)+/g, m => '<ul>' + m + '</ul>')
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/^(?!<[h|u|o|l|h])/gm, '');
-
-  return '<p>' + html + '</p>';
+  return md
+    .split('\n').map(line => {
+      if (line.startsWith('### ')) return '<h3>' + line.slice(4) + '</h3>';
+      if (line.startsWith('## ')) return '<h2>' + line.slice(3) + '</h2>';
+      if (line.startsWith('# ')) return '<h1>' + line.slice(2) + '</h1>';
+      if (line.startsWith('---')) return '<hr style="border-color:var(--navy-border);margin:1.5em 0">';
+      if (line.match(/^\d+\.\s/)) return '<li>' + line.replace(/^\d+\.\s/, '') + '</li>';
+      if (line.match(/^[-*]\s/)) return '<li>' + line.slice(2) + '</li>';
+      if (line.trim() === '') return '<br>';
+      return '<p>' + line.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>') + '</p>';
+    }).join('\n');
 }
 
 function updateCharCount(inputId, countId, max) {
@@ -1018,31 +648,24 @@ function updateSerpPreview() {
   const title = document.getElementById('seo-title').value || '—';
   const desc = document.getElementById('meta-desc').value || '—';
   const slug = document.getElementById('url-slug').value || 'page-slug';
-  const wpUrl = document.getElementById('wp-url').value || 'https://3sgroup.ae';
+  const wpUrl = document.getElementById('wp-url').value || 'https://3sbusinessme.com';
   document.getElementById('serp-title-preview').textContent = title;
-  document.getElementById('serp-url-preview').textContent = wpUrl.replace(/\/$/, '') + '/' + slug;
+  document.getElementById('serp-url-preview').textContent = wpUrl.replace(/\/$/,'') + '/' + slug;
   document.getElementById('serp-desc-preview').textContent = desc;
 }
 
 function addSecKw(e) {
   if (e.key !== 'Enter') return;
   const val = e.target.value.trim();
-  if (val && !state.secKws.includes(val)) {
-    state.secKws.push(val);
-    renderSecKws();
-  }
+  if (val && !state.secKws.includes(val)) { state.secKws.push(val); renderSecKws(); }
   e.target.value = '';
 }
 
-function removeSecKw(i) {
-  state.secKws.splice(i, 1);
-  renderSecKws();
-}
+function removeSecKw(i) { state.secKws.splice(i,1); renderSecKws(); }
 
 function renderSecKws() {
-  document.getElementById('sec-kw-tags').innerHTML = state.secKws.map((k, i) =>
-    `<div class="kw-tag">${k}<span class="remove" onclick="removeSecKw(${i})">×</span></div>`
-  ).join('');
+  document.getElementById('sec-kw-tags').innerHTML = state.secKws.map((k,i) =>
+    `<div class="kw-tag">${k}<span class="remove" onclick="removeSecKw(${i})">×</span></div>`).join('');
 }
 
 function runChecklist() {
@@ -1053,7 +676,7 @@ function runChecklist() {
     'chk-kw': document.getElementById('focus-kw').value.trim().length > 0,
     'chk-wp': document.getElementById('wp-url').value.length > 0 && document.getElementById('wp-pass').value.length > 0
   };
-  Object.entries(checks).forEach(([id, ok]) => {
+  Object.entries(checks).forEach(([id,ok]) => {
     const el = document.getElementById(id);
     el.textContent = ok ? '✓' : '✗';
     el.className = 'check-icon ' + (ok ? 'ok' : 'fail');
@@ -1061,27 +684,21 @@ function runChecklist() {
 }
 
 async function testWP() {
-  const url = document.getElementById('wp-url').value.trim().replace(/\/$/, '');
+  const url = document.getElementById('wp-url').value.trim().replace(/\/$/,'');
   const user = document.getElementById('wp-user').value.trim();
   const pass = document.getElementById('wp-pass').value.trim();
-  if (!url || !user || !pass) { log('Fill in all WordPress credentials first.', 'err'); return; }
-
-  log('Testing WordPress connection...', 'info');
-  document.getElementById('conn-dot').style.background = '#C9A84C';
+  if (!url || !user || !pass) { log('Fill in all WordPress credentials first.','err'); return; }
+  log('Testing WordPress connection...','info');
+  document.getElementById('conn-dot').style.background = 'var(--gold)';
   document.getElementById('conn-label').textContent = 'Connecting...';
-
   try {
-    const res = await fetch(url + '/wp-json/wp/v2/users/me', {
-      headers: { 'Authorization': 'Basic ' + btoa(user + ':' + pass) }
-    });
+    const res = await fetch(url + '/wp-json/wp/v2/users/me', { headers: { 'Authorization': 'Basic ' + btoa(user + ':' + pass) } });
     if (res.ok) {
       const data = await res.json();
       log('Connected as: ' + (data.name || user), 'ok');
       document.getElementById('conn-dot').style.background = 'var(--success)';
       document.getElementById('conn-label').textContent = 'Connected';
-    } else {
-      throw new Error('HTTP ' + res.status);
-    }
+    } else { throw new Error('HTTP ' + res.status); }
   } catch(e) {
     log('Connection failed: ' + e.message, 'err');
     document.getElementById('conn-dot').style.background = 'var(--danger)';
@@ -1091,7 +708,7 @@ async function testWP() {
 
 async function publishToWP() {
   runChecklist();
-  const url = document.getElementById('wp-url').value.trim().replace(/\/$/, '');
+  const url = document.getElementById('wp-url').value.trim().replace(/\/$/,'');
   const user = document.getElementById('wp-user').value.trim();
   const pass = document.getElementById('wp-pass').value.trim();
   const seoTitle = document.getElementById('seo-title').value;
@@ -1104,63 +721,34 @@ async function publishToWP() {
   const h1 = document.getElementById('preview-h1').textContent;
   const faqSchema = document.getElementById('faq-schema').textContent;
 
-  if (!state.generated) { log('Generate a blog first.', 'err'); return; }
-  if (!url || !user || !pass) { log('WordPress credentials missing.', 'err'); return; }
+  if (!state.generated) { log('Generate a blog first.','err'); return; }
+  if (!url || !user || !pass) { log('WordPress credentials missing.','err'); return; }
 
   const blogContent = document.getElementById('blog-output').innerHTML;
   const schemaBlock = faqSchema && faqSchema !== 'Schema will appear after blog generation.'
     ? `\n<script type="application/ld+json">\n${faqSchema}\n<\/script>` : '';
-
   const fullContent = blogContent + schemaBlock;
 
   document.getElementById('pub-spinner').style.display = 'inline-block';
   document.getElementById('publish-btn').disabled = true;
-  log('Publishing to WordPress...', 'info');
+  log('Publishing to WordPress...','info');
 
   try {
     const tagsArr = tags.split(',').map(t => t.trim()).filter(Boolean);
     let tagIds = [];
-    if (tagsArr.length) {
-      log('Creating/finding tags...', 'info');
-      for (const tag of tagsArr) {
-        try {
-          const tr = await fetch(url + '/wp-json/wp/v2/tags', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Basic ' + btoa(user + ':' + pass)
-            },
-            body: JSON.stringify({ name: tag })
-          });
-          const td = await tr.json();
-          if (td.id) tagIds.push(td.id);
-          else if (td.code === 'term_exists') tagIds.push(td.data.term_id);
-        } catch(e) {}
-      }
+    for (const tag of tagsArr) {
+      try {
+        const tr = await fetch(url + '/wp-json/wp/v2/tags', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Basic ' + btoa(user + ':' + pass) }, body: JSON.stringify({ name: tag }) });
+        const td = await tr.json();
+        if (td.id) tagIds.push(td.id);
+        else if (td.code === 'term_exists') tagIds.push(td.data.term_id);
+      } catch(e) {}
     }
 
-    const endpoint = url + '/wp-json/wp/v2/' + postType;
-    const body = {
-      title: h1,
-      content: fullContent,
-      status: postStatus,
-      slug: slug,
-      tags: tagIds,
-      meta: {
-        rank_math_title: seoTitle,
-        rank_math_description: metaDesc,
-        rank_math_focus_keyword: focusKw,
-      }
-    };
-
-    log('Posting to ' + endpoint, 'info');
-    const res = await fetch(endpoint, {
+    const res = await fetch(url + '/wp-json/wp/v2/' + postType, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa(user + ':' + pass)
-      },
-      body: JSON.stringify(body)
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Basic ' + btoa(user + ':' + pass) },
+      body: JSON.stringify({ title: h1, content: fullContent, status: postStatus, slug: slug, tags: tagIds, meta: { rank_math_title: seoTitle, rank_math_description: metaDesc, rank_math_focus_keyword: focusKw } })
     });
 
     const result = await res.json();
@@ -1169,24 +757,12 @@ async function publishToWP() {
       log('URL: ' + result.link, 'ok');
       document.getElementById('preview-badge').className = 'badge published';
       document.getElementById('preview-badge').textContent = 'Published';
-
       const resBox = document.getElementById('wp-result');
       resBox.classList.add('visible');
-      document.getElementById('wp-result-content').innerHTML = `
-        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px">Post ID: <strong style="color:var(--text-primary)">${result.id}</strong></div>
-        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">Status: <strong style="color:#4caf7d">${result.status}</strong></div>
-        <a href="${result.link}" target="_blank" style="color:var(--gold);font-size:13px;text-decoration:none;">${result.link} ↗</a>
-      `;
-
-      const qi = document.querySelector('.queue-item.active .qi-badge');
-      if (qi) { qi.textContent = '✓'; qi.className = 'qi-badge done'; }
+      document.getElementById('wp-result-content').innerHTML = `<div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px">Post ID: <strong style="color:var(--text-primary)">${result.id}</strong></div><div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">Status: <strong style="color:#4caf7d">${result.status}</strong></div><a href="${result.link}" target="_blank" style="color:var(--gold);font-size:13px;text-decoration:none;">${result.link} ↗</a>`;
       pickNext();
-    } else {
-      throw new Error(result.message || JSON.stringify(result));
-    }
-  } catch(e) {
-    log('Publish error: ' + e.message, 'err');
-  }
+    } else { throw new Error(result.message || JSON.stringify(result)); }
+  } catch(e) { log('Publish error: ' + e.message, 'err'); }
 
   document.getElementById('pub-spinner').style.display = 'none';
   document.getElementById('publish-btn').disabled = false;
