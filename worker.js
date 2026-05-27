@@ -773,7 +773,7 @@ async function publishToWP() {
 `;
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
     if (url.pathname === '/' || url.pathname === '/index.html') {
@@ -804,7 +804,7 @@ export default {
           return new Response(JSON.stringify({ error: { message: 'No API key provided' } }), { status: 400, headers: corsHeaders });
         }
 
-        const body = await request.text();
+        const body = await request.arrayBuffer();
 
         const response = await fetch('https://api.anthropic.com/v1/messages', {
           method: 'POST',
@@ -817,8 +817,12 @@ export default {
           body: body
         });
 
-        const data = await response.text();
-        return new Response(data, { status: response.status, headers: corsHeaders });
+        const responseBody = await response.arrayBuffer();
+
+        return new Response(responseBody, {
+          status: response.status,
+          headers: corsHeaders
+        });
 
       } catch(err) {
         return new Response(JSON.stringify({ error: { message: err.message } }), { status: 500, headers: corsHeaders });
