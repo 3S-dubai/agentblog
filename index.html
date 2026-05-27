@@ -535,7 +535,7 @@ OUTPUT: Return only the blog content in Markdown. No preamble. Start directly wi
   try {
     setProgress(30, 'Writing blog content...');
     const data = await callClaude({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-5',
       max_tokens: 4000,
       system: systemPrompt,
       messages: [{ role: 'user', content: `Write a comprehensive blog post answering this question: "${question}"` }]
@@ -588,7 +588,7 @@ Blog excerpt: ${markdown.substring(0, 600)}`;
 
   try {
     const data = await callClaude({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-5',
       max_tokens: 800,
       messages: [{ role: 'user', content: seoPrompt }]
     }, apiKey);
