@@ -1,4 +1,6 @@
-exports.handler = async function(event, context) {
+const https = require('https');
+
+exports.handler = async function(event) {
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type, x-api-key',
@@ -16,31 +18,37 @@ exports.handler = async function(event, context) {
 
   try {
     const apiKey = event.headers['x-api-key'] || event.headers['X-Api-Key'];
-    
     if (!apiKey) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: { message: 'No API key provided' } }) };
     }
 
-    const body = JSON.parse(event.body);
+    const body = event.body;
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01'
-      },
-      body: JSON.stringify(body)
+    const result = await new Promise((resolve, reject) => {
+      const options = {
+        hostname: 'api.anthropic.com',
+        path: '/v1/messages',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'Content-Length': Buffer.byteLength(body)
+        }
+      };
+
+      const req = https.request(options, (res) => {
+        let data = '';
+        res.on('data', chunk => data += chunk);
+        res.on('end', () => resolve({ status: res.statusCode, body: data }));
+      });
+
+      req.on('error', reject);
+      req.write(body);
+      req.end();
     });
 
-    const text = await response.text();
-    
-    try {
-      const data = JSON.parse(text);
-      return { statusCode: response.status, headers, body: JSON.stringify(data) };
-    } catch(e) {
-      return { statusCode: response.status, headers, body: JSON.stringify({ error: { message: text } }) };
-    }
+    return { statusCode: result.status, headers, body: result.body };
 
   } catch(err) {
     return { statusCode: 500, headers, body: JSON.stringify({ error: { message: err.message } }) };
