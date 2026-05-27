@@ -536,7 +536,7 @@ OUTPUT: Return only the blog content in Markdown. No preamble. Start directly wi
     setProgress(30, 'Writing blog content...');
     const data = await callClaude({
       model: 'claude-sonnet-4-5',
-      max_tokens: 4000,
+      max_tokens: 2000,
       system: systemPrompt,
       messages: [{ role: 'user', content: \`Write a comprehensive blog post answering this question: "\${question}"\` }]
     }, apiKey);
@@ -589,7 +589,7 @@ Blog excerpt: \${markdown.substring(0, 600)}\`;
   try {
     const data = await callClaude({
       model: 'claude-sonnet-4-5',
-      max_tokens: 800,
+      max_tokens: 500,
       messages: [{ role: 'user', content: seoPrompt }]
     }, apiKey);
 
@@ -804,7 +804,8 @@ export default {
           return new Response(JSON.stringify({ error: { message: 'No API key provided' } }), { status: 400, headers: corsHeaders });
         }
 
-        const body = await request.arrayBuffer();
+        const body = await request.text();
+        const parsed = JSON.parse(body);
 
         const response = await fetch('https://api.anthropic.com/v1/messages', {
           method: 'POST',
@@ -814,12 +815,11 @@ export default {
             'anthropic-version': '2023-06-01',
             'anthropic-dangerous-direct-browser-access': 'true'
           },
-          body: body
+          body: JSON.stringify(parsed)
         });
 
-        const responseBody = await response.arrayBuffer();
-
-        return new Response(responseBody, {
+        const text = await response.text();
+        return new Response(text, {
           status: response.status,
           headers: corsHeaders
         });
