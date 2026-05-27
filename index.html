@@ -380,7 +380,7 @@
 let state = { queue: [], currentIdx: -1, blogHTML: '', generated: false, secKws: [] };
 
 // The proxy URL — calls our Netlify function instead of Anthropic directly
-const PROXY_URL = "https://thriving-trifle-db6b81.netlify.app/.netlify/functions/claude-proxy";
+const PROXY_URL = '/claude-proxy';
 
 function switchTab(name, btn) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
